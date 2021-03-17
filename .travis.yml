@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - dockerfile
+
+before_install:
+  - docker build -t gzkatana/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true gzkatana/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t gzkatana/multi-client ./client
+  - docker build -t gzkatana/multi-server ./server
+  - docker build -t gzkatana/multi-nginx ./nginx
+  - docker build -t gzkatana/multi-worker ./worker
+  #log in docker hub
+  - echo "$docker_password" | docker login -u "$docker_username" --password-stdin
+  # push the images to docker hub
+  - docker push gzkatana/multi-client
+  - docker push gzkatana/multi-server
+  - docker push gzkatana/multi-nginx
+  - docker push gzkatana/multi-worker 
+ 
