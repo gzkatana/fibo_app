@@ -3,6 +3,7 @@ WORKDIR /app/fibo-client
 COPY package.json .
 RUN npm install 
 COPY ./ ./
+RUN npm install --save-dev @testing-library/jest-dom
 RUN npm run build
 
 FROM nginx
