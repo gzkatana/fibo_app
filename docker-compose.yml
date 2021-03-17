@@ -12,7 +12,7 @@ services:
       context: ./server
     volumes: 
       - /app/fibo-server/node_modules
-      - ./server:/app/fibo-server\
+      - ./server:/app/fibo-server
     environment: 
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -21,3 +21,19 @@ services:
       - PGDATABASE=postgres
       - PGPASSWORD=postgre_password
       - PGPORT=5432
+  
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes: 
+      - /app/fibo-client/node_modules
+      - ./client:/app/fibo-client
+
+  worker:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes: 
+      - /app/fibo-worker/node_modules
+      - ./worker:/app/fibo-worker
