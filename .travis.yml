@@ -6,7 +6,7 @@ before_install:
   - docker build -t gzkatana/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true gzkatana/react-test npm run test -- --coverage
+  - docker run gzkatana/react-test npm test -- --coverage
 
 after_success:
   - docker build -t gzkatana/multi-client ./client
