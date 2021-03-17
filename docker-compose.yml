@@ -45,3 +45,6 @@ services:
     volumes: 
       - /app/fibo-worker/node_modules
       - ./worker:/app/fibo-worker
+    environment:
+    - REDIS_HOST=redis
+    - REDIS_PORT=6379
