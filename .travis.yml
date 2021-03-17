@@ -20,4 +20,5 @@ after_success:
   - docker push gzkatana/multi-server
   - docker push gzkatana/multi-nginx
   - docker push gzkatana/multi-worker 
+  #end
  
