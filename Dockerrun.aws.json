@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "gzkatana/multi-client",
+            "hostname": "client",
+            "essential": false             
+        },
+        {
+            "name": "server",
+            "image": "gzkatana/multi-server",
+            "hostname": "api",
+            "essential": false             
+        },
+        {
+            "name": "worker",
+            "image": "gzkatana/multi-worker",
+            "hostname": "worker",
+            "essential": false             
+        },
+        {
+            "name": "nginx",
+            "image": "gzkatana/multi-nginx",
+            "hostname": "mginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostport": 80,
+                    "containerport": 80
+                }
+            ],
+            "links": ["client","server"]             
+        }
+    ]
+}
