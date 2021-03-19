@@ -21,4 +21,16 @@ after_success:
   - docker push gzkatana/multi-nginx
   - docker push gzkatana/multi-worker 
   #end
- 
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: "AKIA5ECYDALW44GFTTMO"
+  secret_access_key: "$AWS_SECRET_KEY"
+  region: "eu-west-3"
+  app: "multi-docker"
+  env: "Multidocker-env"
+  bucket_name: "elasticbeanstalk-eu-west-3-902127878893"
+  bucker_path: "multi-docker"
+  skip_cleanup: true
+  on:
+    branch: master
